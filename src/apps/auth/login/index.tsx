@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 
+import { Loader2 } from "lucide-react";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import {
   Form,
   FormControl,
@@ -27,7 +28,7 @@ export function Login() {
     resolver,
   });
 
-  const login = useLogin();
+  const { login, isPending } = useLogin();
 
   return (
     <div className="flex flex-col gap-6">
@@ -43,36 +44,13 @@ export function Login() {
             <form onSubmit={form.handleSubmit(login)} noValidate>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <EmailInput form={form} />
                 </div>
                 <div className="grid gap-2">
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input type="password" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <PasswordInput form={form} />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending && <Loader2 className="animate-spin" />}
                   Login
                 </Button>
               </div>
@@ -81,5 +59,41 @@ export function Login() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+function EmailInput({ form }) {
+  return (
+    <FormField
+      control={form.control}
+      name="email"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>Email</FormLabel>
+          <FormControl>
+            <Input type="email" {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+function PasswordInput({ form }) {
+  return (
+    <FormField
+      control={form.control}
+      name="password"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>Password</FormLabel>
+          <FormControl>
+            <Input type="password" {...field} />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }

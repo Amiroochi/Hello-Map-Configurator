@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useMemo } from "react";
 
-import { useUser, UseUserReturn } from "./hooks/use-user";
+import { useUser, UseUserReturn } from "./apps/auth/hooks/use-user";
 
 const AppContext = createContext<{ user: UseUserReturn } | null>(null);
 
