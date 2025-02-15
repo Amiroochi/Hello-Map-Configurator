@@ -1,6 +1,17 @@
-export type ErrorStatus = 400 | 401 | 403 | 404 | 409 | 500;
+export enum ErrorStatus {
+  BAD_REQUEST = 400,
+  NOT_AUTHENTICATED = 401,
+  NOT_AUTHORIZED = 403,
+  NOT_FOUND = 404,
+  DUPLICATE_ENTITY = 409,
+  SERVER_ERROR = 500,
+}
 
-export type SuccessStatus = 200 | 201 | 204;
+export enum SuccessStatus {
+  ACCEPTED = 200,
+  CREATED = 201,
+  UPDATED = 204,
+}
 
 export interface IError {
   message?: string;
