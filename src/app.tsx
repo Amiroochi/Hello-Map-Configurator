@@ -6,7 +6,6 @@ import { AppProvider, useApp } from "./app-provider";
 import { AuthenticatedApp } from "./authenticated-app";
 import { ErrorHandler } from "./components/error-handler";
 import { UnAuthenticatedApp } from "./unauthenticated-app";
-import { Login } from "./apps/auth/login";
 
 const queryClient = new QueryClient();
 
