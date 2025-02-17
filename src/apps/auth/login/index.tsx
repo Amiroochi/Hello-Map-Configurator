@@ -44,10 +44,34 @@ export function Login() {
             <form onSubmit={form.handleSubmit(login)} noValidate>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <EmailInput form={form} />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 <div className="grid gap-2">
-                  <PasswordInput form={form} />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input type="password" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
                 <Button type="submit" className="w-full" disabled={isPending}>
                   {isPending && <Loader2 className="animate-spin" />}
@@ -59,43 +83,5 @@ export function Login() {
         </CardContent>
       </Card>
     </div>
-  );
-}
-
-// @ts-ignore
-function EmailInput({ form }) {
-  return (
-    <FormField
-      control={form.control}
-      name="email"
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>Email</FormLabel>
-          <FormControl>
-            <Input type="email" {...field} />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
-}
-
-// @ts-ignore
-function PasswordInput({ form }) {
-  return (
-    <FormField
-      control={form.control}
-      name="password"
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>Password</FormLabel>
-          <FormControl>
-            <Input type="password" {...field} />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
   );
 }
