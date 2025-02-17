@@ -7,7 +7,7 @@ import { RedirectToAuth } from "./components/redirect-to-auth";
 export function UnAuthenticatedApp() {
   return (
     <Routes>
-      <Route path="/" element={<AuthLayout />}>
+      <Route element={<AuthLayout />}>
         <Route index path="login" element={<Login />} />
         <Route path="*" element={<RedirectToAuth />} />
       </Route>
