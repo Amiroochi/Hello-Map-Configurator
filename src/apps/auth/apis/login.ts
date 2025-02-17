@@ -17,7 +17,7 @@ function login({ email, password }: Params) {
 }
 
 export function useLoginApi() {
-  return useMutation<ISuccess, IError, Params>({
+  return useMutation<ISuccess & { token: string }, IError, Params>({
     mutationFn: login,
   });
 }
