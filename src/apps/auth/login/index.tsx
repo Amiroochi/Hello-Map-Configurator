@@ -62,7 +62,8 @@ export function Login() {
   );
 }
 
-function EmailInput({ form }: { form: any}) {
+// @ts-ignore
+function EmailInput({ form }) {
   return (
     <FormField
       control={form.control}
@@ -80,7 +81,8 @@ function EmailInput({ form }: { form: any}) {
   );
 }
 
-function PasswordInput({ form }: { form: any}) {
+// @ts-ignore
+function PasswordInput({ form }) {
   return (
     <FormField
       control={form.control}
