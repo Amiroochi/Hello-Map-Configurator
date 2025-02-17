@@ -62,7 +62,7 @@ export function Login() {
   );
 }
 
-function EmailInput({ form }) {
+function EmailInput({ form }: { form: any}) {
   return (
     <FormField
       control={form.control}
@@ -80,7 +80,7 @@ function EmailInput({ form }) {
   );
 }
 
-function PasswordInput({ form }) {
+function PasswordInput({ form }: { form: any}) {
   return (
     <FormField
       control={form.control}
