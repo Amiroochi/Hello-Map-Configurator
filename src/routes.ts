@@ -5,6 +5,9 @@ const auth = {
 const dashboard = {
   home: "/dashboard",
   profile: "/dashboard/profile",
+  setting: "/dashboard/setting",
+  support: "/dashboard/support",
+  feedback: "/dashboard/feedback",
   projects: "/dashboard/projects",
 };
 
