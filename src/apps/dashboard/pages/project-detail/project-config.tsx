@@ -9,9 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loading } from "@/components/loading";
-import { LucideBox, LucideHexagon, LucideLayers } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { MouseEventHandler } from "react";
+import { LucideHexagon, LucideLayers } from "lucide-react";
 
 type ProjectConfigProps = {
   projectId: string | undefined;
