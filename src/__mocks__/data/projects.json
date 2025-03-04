@@ -1,0 +1,62 @@
+[
+  {
+    "canonical_name": 1,
+    "caption": "Weather Tracker",
+    "description": "A project to track weather conditions.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 2,
+    "caption": "Travel Planner",
+    "description": "An app to plan and organize travel itineraries.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 3,
+    "caption": "Fitness Tracker",
+    "description": "A project to monitor and record fitness activities.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 4,
+    "caption": "Recipe Finder",
+    "description": "An app to find and save cooking recipes.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 5,
+    "caption": "Expense Manager",
+    "description": "A tool to manage and track personal expenses.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 6,
+    "caption": "Language Learner",
+    "description": "An app to help users learn new languages.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 7,
+    "caption": "Book Library",
+    "description": "A project to catalog and manage a personal book collection.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 8,
+    "caption": "Movie Database",
+    "description": "An app to keep track of watched and favorite movies.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 9,
+    "caption": "Task Manager",
+    "description": "A tool to organize and manage daily tasks.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  },
+  {
+    "canonical_name": 10,
+    "caption": "Garden Planner",
+    "description": "An app to plan and manage a home garden.",
+    "icon_url": "https://staticcontent.heller-ig.de/icons/institution/heller/hi_Corporate_Design_Bildmarke_RZ_RGB.png"
+  }
+]

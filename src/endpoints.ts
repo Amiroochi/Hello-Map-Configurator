@@ -8,4 +8,10 @@ const auth = {
   login: () => withBaseURL("login"),
 };
 
-export { auth };
+const dashboard = {
+  readProjects: (userId: string) => withBaseURL(`users/${userId}/projects`),
+  readProject: (projectId: string) => withBaseURL(`projects/${projectId}`),
+  readProjectConfig: (projectId: string) => withBaseURL(`projects/${projectId}/config`),
+};
+
+export { auth, dashboard };

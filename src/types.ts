@@ -27,3 +27,34 @@ export type User = {
   name: string;
   email: string;
 };
+
+export type Project = {
+  id: string;
+  name: string;
+  description?: string;
+  icon?: string;
+};
+
+type HiRise = {
+  type: ".hiRise";
+  id: string;
+  name: string;
+};
+
+type Group = {
+  type: ".Group";
+  id: string;
+  name: string;
+  layers: {
+    id: string;
+    name: string;
+  }[] | undefined;
+};
+
+export type Layer = HiRise | Group;
+
+export type ProjectConfig = {
+  id: string;
+  title: string;
+  layers: Layer[];
+};
