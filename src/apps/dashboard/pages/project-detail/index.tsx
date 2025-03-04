@@ -14,8 +14,6 @@ export default function ProjectDetail() {
 
   const { project, isLoading } = useProjectDetail({ projectId });
 
-  console.log(project);
-
   return (
     <div className="flex flex-col space-y-2 h-full">
       <PageHeader title={project?.name!} />

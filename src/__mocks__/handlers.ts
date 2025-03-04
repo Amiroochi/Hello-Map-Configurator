@@ -24,8 +24,8 @@ export const handlers = [
     await delay(DELAY);
 
     return HttpResponse.json({
-      id: params.projectId,
-      name: "Weather Tracker",
+      canonical_name: params.projectId,
+      caption: "Weather Tracker",
       description: "A project to track weather conditions.",
     });
   }),
