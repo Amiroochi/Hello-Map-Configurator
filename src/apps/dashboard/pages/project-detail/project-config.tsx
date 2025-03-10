@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { Tree } from "react-arborist";
-import { useProjectConfig } from "./use-project-config";
+
+import { LucideHexagon, LucideLayers } from "lucide-react";
+
+import { LayerType } from "@/types";
+import { Loading } from "@/components/loading";
 import {
   Select,
   SelectContent,
@@ -8,24 +13,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loading } from "@/components/loading";
-import { LucideHexagon, LucideLayers } from "lucide-react";
+
+import { useProjectConfig } from "./use-project-config";
 
 type ProjectConfigProps = {
   projectId: string | undefined;
 };
 
 export function ProjectConfig({ projectId }: ProjectConfigProps) {
+  const [selectedRoot, setSelectedRoot] = useState<string | undefined>();
+
   const { projectConfig, layers, isLoading, onRootChange } = useProjectConfig({
     projectId,
   });
 
+  const updateRoot = (root: string) => {
+    setSelectedRoot(root);
+    onRootChange(root);
+  };
+
   if (isLoading) return <Loading />;
 
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2 h-full">
       <div>
-        <Select onValueChange={onRootChange}>
+        <Select onValueChange={updateRoot}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a map to see layers" />
           </SelectTrigger>
@@ -40,17 +52,19 @@ export function ProjectConfig({ projectId }: ProjectConfigProps) {
           </SelectContent>
         </Select>
       </div>
-      <div>
+      <div className="flex-1">
         <Tree
+          key={selectedRoot}
           data={layers}
           // @ts-ignore
           childrenAccessor={(d) => {
-            if (d.type === ".Group") {
+            if (d.type === LayerType.Group) {
               return d.layers!;
             }
           }}
           openByDefault={false}
           width="100%"
+          height={650}
         >
           {Node}
         </Tree>
@@ -76,7 +90,7 @@ function Node({
   return (
     <a
       ref={dragHandle}
-      className="hover:text-blue-500 cursor-pointer"
+      className="hover:text-blue-500 dark:hover:text-blue-300 cursor-pointer"
       style={style}
       onClick={onClick}
     >

@@ -1,6 +1,8 @@
 import { useCallback, useState } from "react";
-import { useReadProjectConfigApi } from "../../api/read-project-config";
+
 import { Layer, ProjectConfig } from "@/types";
+
+import { useReadProjectConfigApi } from "../../api/read-project-config";
 
 type UseProjectConfigProps = {
   projectId?: string;
@@ -8,7 +10,7 @@ type UseProjectConfigProps = {
 
 type UseProjectConfigReturn = {
   projectConfig: ProjectConfig[] | undefined;
-  layers: Layer[] | undefined,
+  layers: Layer[] | undefined;
   isLoading: boolean;
   onRootChange: (root: string) => void;
 };

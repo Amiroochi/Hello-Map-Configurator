@@ -35,23 +35,39 @@ export type Project = {
   icon?: string;
 };
 
-type HiRise = {
-  type: ".hiRise";
+export enum LayerType {
+  HiRise = ".hiRise",
+  Group = ".Group",
+  WMTS = ".WMTS",
+  MVT = ".MVT",
+  CustomWms = ".CustomWms",
+  SystemWms = ".SystemWms",
+}
+
+type Single = {
+  type:
+    | LayerType.HiRise
+    | LayerType.WMTS
+    | LayerType.MVT
+    | LayerType.CustomWms
+    | LayerType.SystemWms;
   id: string;
   name: string;
 };
 
 type Group = {
-  type: ".Group";
+  type: LayerType.Group;
   id: string;
   name: string;
-  layers: {
-    id: string;
-    name: string;
-  }[] | undefined;
+  layers:
+    | {
+        id: string;
+        name: string;
+      }[]
+    | undefined;
 };
 
-export type Layer = HiRise | Group;
+export type Layer = Single | Group;
 
 export type ProjectConfig = {
   id: string;

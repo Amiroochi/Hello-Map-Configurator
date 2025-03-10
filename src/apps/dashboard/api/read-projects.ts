@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 import axios from "@/lib/axios";
+import { Project } from "@/types";
 import { dashboard } from "@/endpoints";
 
 import { projects } from "../query-keys";
-import { Project } from "@/types";
 
 type Params = {
   userId: string;
