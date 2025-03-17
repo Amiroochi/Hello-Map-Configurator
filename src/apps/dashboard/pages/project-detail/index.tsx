@@ -2,14 +2,29 @@ import { useParams } from "react-router";
 
 import { ArrowRight } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
+import { Uploady } from "@rpldy/uploady";
+import { asUploadButton, ButtonProps } from "@rpldy/upload-button";
+
 import { Loading } from "@/components/loading";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import { ProjectConfig } from "./project-config";
 import { NoConfig } from "../../components/no-config";
 import { useProjectDetail } from "./use-project-detail";
 import { PageHeader } from "../../components/page-header";
+import { Input } from "@/components/ui/input";
+import { forwardRef } from "react";
+import { Label } from "@/components/ui/label";
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
@@ -18,12 +33,11 @@ export default function ProjectDetail() {
 
   return (
     <div className="flex flex-col space-y-2 h-full">
-      <PageHeader title={project?.name!} />
+      <PageHeader title={project?.name!} actions={<Actions />} />
       {isLoading ? (
         <Loading />
       ) : (
         <>
-          <div><Input type="file" /></div>
           <div className="flex flex-1">
             <div className="flex flex-col flex-1 border-4 rounded-l-md border-slate-200 dark:border-neutral-800">
               <div className="bg-slate-200 dark:bg-neutral-800 p-4">
@@ -56,25 +70,48 @@ export default function ProjectDetail() {
   );
 }
 
-// const data = [
-//   { id: "1", name: "Unread" },
-//   { id: "2", name: "Threads" },
-//   {
-//     id: "3",
-//     name: "Chat Rooms",
-//     children: [
-//       { id: "c1", name: "General" },
-//       { id: "c2", name: "Random" },
-//       { id: "c3", name: "Open Source Projects" },
-//     ],
-//   },
-//   {
-//     id: "4",
-//     name: "Direct Messages",
-//     children: [
-//       { id: "d1", name: "Alice" },
-//       { id: "d2", name: "Bob" },
-//       { id: "d3", name: "Charlie" },
-//     ],
-//   },
-// ];
+const Actions = () => {
+  const { projectId } = useParams();
+
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="secondary">Upload or Import Config</Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Upload Config</SheetTitle>
+          <SheetDescription>Upload project config.</SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 p-4">
+          <Uploady
+            destination={{
+              url: `/projects/${projectId}/config/upload`,
+              method: "POST",
+            }}
+          >
+            <CustomUploadButton />
+          </Uploady>
+          <hr />
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="link">WMS Link</Label>
+            <Input id="link" className="col-span-4" />
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button type="submit">Save changes</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+const CustomUploadButton = asUploadButton(
+  forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => (
+    <Button {...props} style={{ cursor: "pointer" }} size="lg" ref={ref}>
+      Upload
+    </Button>
+  ))
+);
