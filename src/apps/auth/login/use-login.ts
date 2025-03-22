@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useRedirect } from "@/hooks/use-redirect";
 
 import { FormInputs } from "./schema";
-import { useLoginApi } from "../apis/login";
+import { useLoginApi } from "../api/login";
 
 export function useLogin() {
   const { user } = useApp();

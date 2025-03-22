@@ -52,15 +52,15 @@ export const handlers = [
       });
     }
 
-    return HttpResponse.json(projectConfig);
+    return HttpResponse.json(await file.text());
   }),
 
   http.post("/projects/:projectId/config/import", async ({ request }) => {
     await delay(DELAY);
 
-    const body = await request.json();
+    const body = await request.text();
     console.log(body);
 
-    return HttpResponse.json(projectConfig);
+    return HttpResponse.json(body);
   }),
 ];

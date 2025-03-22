@@ -31,6 +31,6 @@ export function createError(error: IError) {
 
 export function dispatchError(error: IError) {
   return window.dispatchEvent(
-    new CustomEvent("error", { detail: createError(error) })
+    new CustomEvent("axios-error", { detail: createError(error) })
   );
 }

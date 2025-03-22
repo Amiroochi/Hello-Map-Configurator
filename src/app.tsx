@@ -7,6 +7,7 @@ import { AppProvider, useApp } from "./app-provider";
 import { AuthenticatedApp } from "./authenticated-app";
 import { ErrorHandler } from "./components/error-handler";
 import { UnAuthenticatedApp } from "./unauthenticated-app";
+import { ThemeProvider } from "./components/theme-provider";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +15,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
-        <AppView />
-        <Toaster />
-        <ErrorHandler />
+        <ThemeProvider>
+          <AppView />
+          <Toaster />
+          <ErrorHandler />
+        </ThemeProvider>
       </AppProvider>
       {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>

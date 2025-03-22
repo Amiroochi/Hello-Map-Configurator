@@ -3,6 +3,7 @@ import { Link } from "react-router";
 
 import { type LucideIcon } from "lucide-react";
 
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -35,6 +36,9 @@ export function NavSecondary({
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
+          <SidebarMenuItem>
+            <ThemeSwitcher />
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

@@ -74,3 +74,5 @@ export type ProjectConfig = {
   title: string;
   layers: Layer[];
 };
+
+export type Root = Pick<ProjectConfig, "id" | "title">;

@@ -7,7 +7,8 @@ export function ErrorHandler() {
   const { toast } = useToast();
 
   useEffect(() => {
-    const listener = ({ error }: { error: IError }) => {
+    const listener = (event: CustomEvent<{ error: IError }>) => {
+      const { error } = event.detail;
       if (
         error.status === ErrorStatus.NOT_AUTHENTICATED ||
         error.status === ErrorStatus.NOT_AUTHORIZED
@@ -22,10 +23,10 @@ export function ErrorHandler() {
       });
     };
 
-    // setup
-    window.addEventListener("error", listener);
+    window.addEventListener("axios-error", listener as EventListener);
     // cleanup
-    return () => window.removeEventListener("error", listener);
+    return () =>
+      window.removeEventListener("axios-error", listener as EventListener);
   }, []);
 
   return null;

@@ -47,51 +47,82 @@ function readProjectConfig({ projectId }: Required<Params>) {
   return axios.get<Response>(dashboard.readProjectConfig(projectId));
 }
 
-export function useReadProjectConfigApi({ projectId }: Params) {
+export function useReadCurrentProjectConfigApi({ projectId }: Params) {
   return useQuery({
-    queryKey: [projects.readProjectConfig, projectId],
+    queryKey: [projects.readCurrentProjectConfig, projectId],
     queryFn: () => readProjectConfig({ projectId: projectId! }),
     enabled: !!projectId,
     select: normalizeData,
   });
 }
 
-function normalizeData(data: Response): ProjectConfig[] {
-  return Object.keys(data?.map).map((key) => ({
+export function useReadUploadedProjectConfigApi({ projectId }: Params) {
+  return useQuery({
+    queryKey: [projects.readUploadedProjectConfig, projectId],
+    queryFn: () => Promise.resolve({}),
+    enabled: !!projectId,
+    select: normalizeData,
+  });
+}
+
+function normalizeData(
+  data: Response | Record<PropertyKey, never>
+): ProjectConfig[] {
+  const keys = Object.keys(data.map);
+
+  if (!keys.length) return [];
+
+  return keys.map((key) => ({
     id: key,
     title: data.map[key].caption,
     layers: [...data.map[key].base_layer, ...data.map[key].content_layer]
-      .filter(
-        (item) =>
-          item.type === LayerType.HiRise ||
-          item.type === LayerType.Group ||
-          item.type === LayerType.WMTS ||
-          item.type === LayerType.MVT ||
-          item.type === LayerType.CustomWms ||
-          item.type === LayerType.SystemWms
-      )
+      .filter(filterByType)
       .map((item) => {
-        if (item.type === LayerType.Group) {
-          return {
-            type: item.type,
-            id: makeId(item.type, data.map[key].caption, item.canonical_name),
-            name: item.caption ?? "Untitled",
-            layers: item.layers?.map((layer) => ({
-              id: layer.canonical_name,
-              name: layer.caption ?? "Untitled",
-            })),
-          };
-        }
-        return {
-          type: item.type,
-          id: makeId(item.type, data.map[key].caption, item.canonical_name),
-          name: item.caption ?? "Untitled",
-        };
+        const id = makeId(
+          item.type,
+          data.map[key].caption,
+          item.canonical_name
+        );
+
+        return item.type === LayerType.Group
+          ? normalizeGroup(id, item)
+          : normalizeSingle(id, item);
       })
-      .filter((layer) => layer !== undefined),
+      .filter(Boolean),
   }));
 }
 
 function makeId(...args: string[]) {
   return args.join("-");
+}
+
+function filterByType(item: Single | Group) {
+  return (
+    item.type === LayerType.HiRise ||
+    item.type === LayerType.Group ||
+    item.type === LayerType.WMTS ||
+    item.type === LayerType.MVT ||
+    item.type === LayerType.CustomWms ||
+    item.type === LayerType.SystemWms
+  );
+}
+
+function normalizeGroup(id: string, item: Group) {
+  return {
+    type: item.type,
+    id,
+    name: item.caption ?? "Untitled",
+    layers: item.layers?.map((layer) => ({
+      id: layer.canonical_name,
+      name: layer.caption ?? "Untitled",
+    })),
+  };
+}
+
+function normalizeSingle(id: string, item: Single) {
+  return {
+    type: item.type,
+    id,
+    name: item.caption ?? "Untitled",
+  };
 }

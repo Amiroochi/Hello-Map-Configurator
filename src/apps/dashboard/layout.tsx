@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-import { AppSidebar } from "./components/app-sidebar";
+import { AppSidebar } from "./components/sidebar/app-sidebar";
 
 export default function DashboardLayout() {
   return (
