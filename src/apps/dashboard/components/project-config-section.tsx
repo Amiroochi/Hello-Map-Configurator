@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { ProjectConfig, Root } from "@/types";
+import { Layer, ProjectConfig, Root } from "@/types";
 import {
   Select,
   SelectContent,
@@ -11,17 +11,20 @@ import {
 } from "@/components/ui/select";
 
 import { ProjectConfigTree } from "./project-config-tree";
+import { DeleteHandler } from "react-arborist";
 
 type ProjectConfigSectionProps = {
   roots: Root[] | undefined;
   config: ProjectConfig | undefined;
   onRootChange: (root: string) => void;
+  onDelete?: DeleteHandler<Layer> | undefined;
 };
 
 export function ProjectConfigSection({
   roots,
   config,
   onRootChange,
+  onDelete,
 }: ProjectConfigSectionProps) {
   const [selectedRoot, setSelectedRoot] = useState<string | undefined>();
 
@@ -48,8 +51,12 @@ export function ProjectConfigSection({
           </SelectContent>
         </Select>
       </div>
-      <div className="flex-1">
-        <ProjectConfigTree root={selectedRoot} layers={config?.layers} />
+      <div className="flex-1 mt-2">
+        <ProjectConfigTree
+          root={selectedRoot}
+          layers={config?.layers}
+          onDelete={onDelete}
+        />
       </div>
     </div>
   );

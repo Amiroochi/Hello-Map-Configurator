@@ -12,7 +12,7 @@ type ProjectConfigProps = {
 };
 
 export function CurrentProjectConfig({ projectId }: ProjectConfigProps) {
-  const { roots, config, loading, onRootChange } = useCurrentProjectConfig({
+  const { roots, config, loading, onRootChange, onDelete } = useCurrentProjectConfig({
     projectId,
   });
 
@@ -23,6 +23,7 @@ export function CurrentProjectConfig({ projectId }: ProjectConfigProps) {
       roots={roots}
       config={config}
       onRootChange={onRootChange}
+      onDelete={onDelete}
     />
   );
 }

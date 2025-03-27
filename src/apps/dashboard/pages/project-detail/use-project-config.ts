@@ -2,12 +2,13 @@ import { useCallback, useMemo } from "react";
 
 import { create } from "zustand";
 
-import { ProjectConfig, Root } from "@/types";
+import { Layer, ProjectConfig, Root } from "@/types";
 
 import {
   useReadCurrentProjectConfigApi,
   useReadUploadedProjectConfigApi,
 } from "../../api/read-project-config";
+import { DeleteHandler, NodeApi } from "react-arborist";
 
 type ProjectConfigStoreState = {
   current: ProjectConfig | undefined;
@@ -35,6 +36,7 @@ type UseProjectConfigReturnType = {
   setConfig: (config: ProjectConfig) => void;
   loading: boolean;
   onRootChange: (root: string) => void;
+  onDelete?: DeleteHandler<Layer> | undefined;
 };
 
 export const useCurrentProjectConfig = ({
@@ -63,12 +65,21 @@ export const useCurrentProjectConfig = ({
     [config]
   );
 
+  const onDelete = useCallback(
+    ({ ids, nodes }: { ids: string[]; nodes: NodeApi<Layer>[] }) => {
+      console.log("ids", ids);
+      console.log("nodes", current?.layers);
+    },
+    [current]
+  );
+
   return {
     roots,
     config: current,
     setConfig: setCurrent,
     loading: config.isLoading,
     onRootChange,
+    onDelete,
   };
 };
 
